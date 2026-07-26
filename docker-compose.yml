@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    expose:
+      - "8000"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    # no fixed container_name / ports here so we can `--scale api=N`
+
+  nginx:
+    image: nginx:1.25-alpine
+    depends_on:
+      - api
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+
+  ui:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ui
+    environment:
+      - API_URL=http://nginx:80
+    ports:
+      - "8501:8501"
+    depends_on:
+      - nginx
