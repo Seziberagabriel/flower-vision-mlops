@@ -6,7 +6,7 @@ with support for bulk data upload and one-click retraining, and load-tested with
 
 ## 🎥 Video Demo
 
-> \*\*YouTube Link:\*\* `<PASTE YOUR UNLISTED YOUTUBE LINK HERE>`
+> \\\*\\\*YouTube Link:\\\*\\\* `<PASTE YOUR UNLISTED YOUTUBE LINK HERE>`
 The video (camera on) demonstrates: (1) uploading a single image and getting a prediction,
 (2) bulk-uploading new images and triggering retraining, (3) the live UI showing uptime and
 data visualizations.
@@ -15,21 +15,21 @@ data visualizations.
 
 |Service|URL|
 |-|-|
-|API (FastAPI + Swagger docs)|`<PASTE YOUR DEPLOYED API URL>/docs`|
-|Web UI|`<PASTE YOUR DEPLOYED UI URL>`|
+|API (FastAPI + Swagger docs)|https://flower-vision-api.onrender.com/docs |
+|Web UI|https://flower-vision-ui.onrender.com|
 
 ## 📖 Project Description
 
 This project builds on the intro-to-ML classification use case, extended to **non-tabular
 (image) data**. It classifies flower photos from the
-[TensorFlow `flower\_photos` dataset](http://download.tensorflow.org/example_images/flower_photos.tgz)
+[TensorFlow `flower\\\_photos` dataset](http://download.tensorflow.org/example_images/flower_photos.tgz)
 (3,670 JPEGs across 5 classes) using **transfer learning on MobileNetV2**.
 
 The pipeline covers the full ML lifecycle:
 
 1. **Data acquisition** — automated download + extraction of the flower\_photos archive (`src/preprocessing.py`).
 2. **Data processing** — resizing, normalization, augmentation, stratified train/val/test split.
-3. **Model creation** — MobileNetV2 (ImageNet weights) as a frozen base + custom classification head, trained with early stopping (`src/model.py`, `notebook/flower\_vision.ipynb`).
+3. **Model creation** — MobileNetV2 (ImageNet weights) as a frozen base + custom classification head, trained with early stopping (`src/model.py`, `notebook/flower\\\_vision.ipynb`).
 4. **Model testing** — accuracy, loss, precision, recall, F1-score, and confusion matrix on a held-out test set.
 5. **Retraining** — any time new labeled images are bulk-uploaded through the UI/API, a retraining job fine-tunes the existing saved model (not from scratch) on the combined old + new data, and a trigger can be fired manually or automatically once enough new samples accumulate.
 6. **API** — FastAPI service exposing `/predict`, `/upload`, `/retrain`, `/status`, `/visualizations`.
@@ -51,7 +51,7 @@ the scope of this assignment.
 flower-vision-mlops/
 ├── README.md
 ├── notebook/
-│   └── flower\_vision.ipynb        # full offline pipeline: data → preprocessing → training → evaluation
+│   └── flower\\\_vision.ipynb        # full offline pipeline: data → preprocessing → training → evaluation
 ├── src/
 │   ├── preprocessing.py           # download, decode, resize, augment, split
 │   ├── model.py                   # build / train / retrain / save / load MobileNetV2 model
@@ -73,7 +73,7 @@ flower-vision-mlops/
 │   ├── train/                     # class-per-folder training images
 │   └── test/                      # held-out test images
 └── models/
-    └── flower\_model.h5            # trained MobileNetV2 classifier (git-lfs recommended)
+    └── flower\\\_model.h5            # trained MobileNetV2 classifier (git-lfs recommended)
 ```
 
 ## ⚙️ Setup Instructions
@@ -81,21 +81,21 @@ flower-vision-mlops/
 ### 1\. Clone \& install
 
 ```bash
-git clone <YOUR\_REPO\_URL>.git
+git clone <YOUR\\\_REPO\\\_URL>.git
 cd flower-vision-mlops
-python3 -m venv venv \&\& source venv/bin/activate
+python3 -m venv venv \\\&\\\& source venv/bin/activate
 pip install -r api/requirements.txt -r ui/requirements.txt
 ```
 
 ### 2\. Get the data \& train the model (offline, via notebook)
 
 ```bash
-jupyter notebook notebook/flower\_vision.ipynb
+jupyter notebook notebook/flower\\\_vision.ipynb
 ```
 
-Run all cells top to bottom. This downloads `flower\_photos.tgz`, preprocesses it into
+Run all cells top to bottom. This downloads `flower\\\_photos.tgz`, preprocesses it into
 `data/train` and `data/test`, trains the MobileNetV2 model, evaluates it, and saves it to
-`models/flower\_model.h5`.
+`models/flower\\\_model.h5`.
 
 ### 3\. Run the API locally
 
@@ -125,7 +125,7 @@ docker compose up --build --scale api=2
 Any Docker-capable host works (Render, Railway, Fly.io, AWS EC2, etc.):
 
 ```bash
-# Example: build \& push, then run on the remote host
+# Example: build \\\& push, then run on the remote host
 docker build -t flower-api -f docker/Dockerfile.api .
 docker build -t flower-ui  -f docker/Dockerfile.ui  .
 docker compose up -d --scale api=<N>
@@ -163,16 +163,16 @@ sample flower image, against the Nginx-fronted API.
 
 1. **Upload**: user (via UI or `POST /api/upload`) submits a ZIP of new labeled images
 (folder-per-class). Files are saved under `data/train/<class>/` and logged in
-`data/uploads\_log.csv` (acts as our lightweight "database" of what's pending retrain).
-2. **Preprocessing**: `src/preprocessing.py::prepare\_retrain\_batch()` resizes/normalizes the
+`data/uploads\\\_log.csv` (acts as our lightweight "database" of what's pending retrain).
+2. **Preprocessing**: `src/preprocessing.py::prepare\\\_retrain\\\_batch()` resizes/normalizes the
 newly uploaded images and merges them into the existing train/test split.
 3. **Retrain**: `POST /api/retrain` (or the UI's "Retrain Model" button) loads the **existing
-saved model** (`models/flower\_model.h5`) as the starting point — not a fresh model — fine-tunes
+saved model** (`models/flower\\\_model.h5`) as the starting point — not a fresh model — fine-tunes
 it for a few epochs on the combined dataset, evaluates it on the held-out test set, and only
 overwrites the production model file if the new accuracy is ≥ the old accuracy (with the
-previous version backed up as `models/flower\_model\_prev.h5`).
+previous version backed up as `models/flower\\\_model\\\_prev.h5`).
 4. **Auto-trigger option**: the API also exposes a threshold check — once
-`len(new\_uploaded\_images) >= RETRAIN\_THRESHOLD` (default 30), the UI surfaces a banner
+`len(new\\\_uploaded\\\_images) >= RETRAIN\\\_THRESHOLD` (default 30), the UI surfaces a banner
 prompting retraining (manual confirmation is still required before the job runs, to avoid
 surprise downtime).
 
@@ -184,7 +184,7 @@ brightness/color per class) with written interpretation of what each tells us ab
 * Preprocessing pipeline
 * Model creation (MobileNetV2 transfer learning + augmentation + dropout + early stopping)
 * Evaluation: accuracy, loss curves, precision, recall, F1-score, confusion matrix
-* Model export to `models/flower\_model.h5`
+* Model export to `models/flower\\\_model.h5`
 
 ## 🧰 Tech Stack
 
