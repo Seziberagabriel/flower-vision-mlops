@@ -37,8 +37,8 @@ The pipeline covers the full ML lifecycle:
 ### Why this dataset?
 
 Flowers are a clean, well-labeled, moderately-sized image classification problem (no auth/API
-key required to download) that still allows meaningful visual storytelling — class balance,
-image-size variation, and color/brightness differences between species — while keeping
+key required to download) that still allows meaningful visual storytelling class balance,
+image-size variation, and color/brightness differences between species while keeping
 training time low enough to iterate quickly and to demonstrate real retraining cycles within
 the scope of this assignment.
 
