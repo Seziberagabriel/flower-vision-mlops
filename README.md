@@ -45,6 +45,8 @@ image-size variation, and color/brightness differences between species — while
 training time low enough to iterate quickly and to demonstrate real retraining cycles within
 the scope of this assignment.
 
+> Note: the live deployment excludes the training dataset (too large for GitHub), so retraining and data visualizations are demonstrated locally in the video — the live API/UI fully support prediction.
+
 ## 🗂️ Repository Structure
 
 ```
