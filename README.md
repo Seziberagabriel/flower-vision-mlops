@@ -171,11 +171,11 @@ Locust 3 Results
 2. **Preprocessing**: `src/preprocessing.py::prepare_retrain_batch()` resizes/normalizes the
 newly uploaded images and merges them into the existing train/test split.
 3. **Retrain**: `POST /api/retrain` (or the UI's "Retrain Model" button) loads the **existing
-saved model** (`models/flower_model.h5`) as the starting point — not a fresh model — fine-tunes
+saved model** (`models/flower_model.h5`) as the starting point not a fresh model fine-tunes
 it for a few epochs on the combined dataset, evaluates it on the held-out test set, and only
 overwrites the production model file if the new accuracy is ≥ the old accuracy (with the
 previous version backed up as `models/flower_model_prev.h5`).
-4. **Auto-trigger option**: the API also exposes a threshold check — once
+4. **Auto-trigger option**: the API also exposes a threshold check once
 `len(new_uploaded_images) >= RETRAIN_THRESHOLD` (default 30), the UI surfaces a banner
 prompting retraining (manual confirmation is still required before the job runs, to avoid
 surprise downtime).
