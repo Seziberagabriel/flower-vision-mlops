@@ -154,6 +154,7 @@ sample flower image, against the Nginx-fronted API.
 |1|710|1300|11.9|0|
 |2|230|1000|15.9|0|
 |4|160|450|16.7|0|
+
 Locust 1 Results
 ![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/64b249aa1e6147231fc977c88c12acb1cbdb5022/locust%201.png)
 
