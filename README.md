@@ -4,21 +4,18 @@ An end-to-end Machine Learning pipeline that classifies flower images into 5 spe
 (**daisy, dandelion, rose, sunflower, tulip**), deployed as a Dockerized API + Web UI,
 with support for bulk data upload and one-click retraining, and load-tested with Locust.
 
-## 🎥 Video Demo
+## Video Demo
 
-> \\\*\\\*YouTube Link:\\\*\\\* `<PASTE YOUR UNLISTED YOUTUBE LINK HERE>`
-The video (camera on) demonstrates: (1) uploading a single image and getting a prediction,
-(2) bulk-uploading new images and triggering retraining, (3) the live UI showing uptime and
-data visualizations.
+**YouTube Link:** https://youtu.be/Ukf_mvVa7LU
 
-## 🌐 Live URLs
+## Live URLs
 
 |Service|URL|
 |-|-|
 |API (FastAPI + Swagger docs)|https://flower-vision-api.onrender.com/docs |
 |Web UI|https://flower-vision-ui.onrender.com|
 
-## 📖 Project Description
+## Project Description
 
 This project builds on the intro-to-ML classification use case, extended to **non-tabular
 (image) data**. It classifies flower photos from the
@@ -47,7 +44,7 @@ the scope of this assignment.
 
 > Note: the live deployment excludes the training dataset (too large for GitHub), so retraining and data visualizations are demonstrated locally in the video — the live API/UI fully support prediction.
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```
 flower-vision-mlops/
@@ -78,7 +75,7 @@ flower-vision-mlops/
     └── flower\\\_model.h5            # trained MobileNetV2 classifier (git-lfs recommended)
 ```
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1\. Clone \& install
 
@@ -146,7 +143,7 @@ locust -f locust/locustfile.py --host http://localhost:8080
 Open http://localhost:8089, set number of users / spawn rate, and run against the API while
 varying `--scale api=1|2|4` in `docker compose up`.
 
-## 📊 Flood Request Simulation Results
+## Flood Request Simulation Results
 
 Recorded with Locust: 200 users, spawn rate 20/s, 3 minutes per run, `POST /predict` with a
 sample flower image, against the Nginx-fronted API.
@@ -166,7 +163,7 @@ Locust 2 Results
 Locust 3 Results
 ![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/4f9cf0d5027b1721b8efd4876c87fd0d4c1651f6/locust%203.png)
 
-## 🔁 Retraining Trigger Design
+## Retraining Trigger Design
 
 1. **Upload**: user (via UI or `POST /api/upload`) submits a ZIP of new labeled images
 (folder-per-class). Files are saved under `data/train/<class>/` and logged in
@@ -183,7 +180,7 @@ previous version backed up as `models/flower\\\_model\\\_prev.h5`).
 prompting retraining (manual confirmation is still required before the job runs, to avoid
 surprise downtime).
 
-## 🧪 Notebook Contents
+## Notebook Contents
 
 * Data acquisition \& inspection
 * Exploratory visualizations (class distribution, sample grid, image-size distribution, average
@@ -193,7 +190,7 @@ brightness/color per class) with written interpretation of what each tells us ab
 * Evaluation: accuracy, loss curves, precision, recall, F1-score, confusion matrix
 * Model export to `models/flower\\\_model.h5`
 
-## 🧰 Tech Stack
+## Tech Stack
 
 Python · TensorFlow/Keras · FastAPI · Streamlit · Docker · Docker Compose · Nginx · Locust
 
