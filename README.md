@@ -161,6 +161,9 @@ Locust 1 Results
 Locust 2 Results
 ![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/135580376d681579273d312a8077bbb9fc4e12a7/locust%202.png)
 
+Locust 3 Results
+![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/4f9cf0d5027b1721b8efd4876c87fd0d4c1651f6/locust%203.png)
+
 ## 🔁 Retraining Trigger Design
 
 1. **Upload**: user (via UI or `POST /api/upload`) submits a ZIP of new labeled images
