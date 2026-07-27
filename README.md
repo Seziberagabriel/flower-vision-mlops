@@ -158,6 +158,9 @@ sample flower image, against the Nginx-fronted API.
 Locust 1 Results
 ![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/64b249aa1e6147231fc977c88c12acb1cbdb5022/locust%201.png)
 
+Locust 2 Results
+![image alt](https://github.com/Seziberagabriel/flower-vision-mlops/blob/135580376d681579273d312a8077bbb9fc4e12a7/locust%202.png)
+
 ## 🔁 Retraining Trigger Design
 
 1. **Upload**: user (via UI or `POST /api/upload`) submits a ZIP of new labeled images
